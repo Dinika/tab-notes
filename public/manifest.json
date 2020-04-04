@@ -3,13 +3,12 @@
   "version": "1.0",
   "description": "Learn every time you open a new tab",
   "manifest_version": 2,
-  "permissions": ["storage"],
   "background": {
-    "scripts": ["background.js"],
+    "scripts": ["app/background.js"],
     "persistent": false
   },
   "chrome_url_overrides": {
-    "newtab": "../html/override_page.html"
+    "newtab": "index.html"
   },
   "page_action": {
     "default_icon": {
@@ -24,5 +23,7 @@
     "32": "icons/get_started32.png",
     "48": "icons/get_started48.png",
     "128": "icons/get_started128.png"
-  }
+  },
+  "content_security_policy": "script-src 'self' 'sha256-hAmZ9T/QtRYUOmejfTzXHpjWls+0eZPr8prqu3v4DO4='; object-src 'self'",
+  "permissions": ["storage"]
 }

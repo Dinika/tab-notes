@@ -1,0 +1,10 @@
+body {
+  background-color: black;
+  /* font-family: "Roboto Mono", monospace; */
+  color: white;
+  height: 100vh;
+}
+
+#root {
+  padding: 20px 0;
+}

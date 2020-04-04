@@ -1,11 +1,5 @@
-body {
-  background-color: black;
-  font-family: "Roboto Mono", monospace;
-  color: white;
-}
-
 h2 {
-  margin-top: 12px;
+  margin-top: 0px;
   color: white;
   text-align: center;
   font-weight: 200;
@@ -37,7 +31,7 @@ a {
 }
 
 #question {
-  color: #1d5deb;
+  color: #cfd3dc;
   font-size: 28px;
 }
 
@@ -47,14 +41,8 @@ a {
 }
 
 #show {
-  color: #41eb52;
+  color: #6b716b;
   font-size: 20px;
-}
-
-#levels-container {
-  color: #41eb52;
-  font-size: 20px;
-  margin-top: 16px;
 }
 
 footer {
@@ -62,7 +50,7 @@ footer {
   bottom: 0;
   width: 100vw;
   display: flex;
-  background-color: #861414;
+  background-color: #101010;
   font-size: 20\px;
   padding: 4px 0;
   font-weight: 200;
