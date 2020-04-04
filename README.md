@@ -1,4 +1,4 @@
-## Tab notes :bookmark tabs:
+## Tab notes :ledger:
 
 A browser extension to help you memorize notes, words, and trivia everytime you open a new tab. The extension is intended to work as
 digital flashcards

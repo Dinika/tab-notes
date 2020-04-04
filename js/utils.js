@@ -95,21 +95,14 @@ const TabNotes = function () {
   }
 
   this.nextQuestion = function () {
-    console.log("nextQuestion")
     storage.get('mnemonicSequence', function ({ mnemonicSequence }) {
       storage.get('curMnemonicSequence', function ({ curMnemonicSequence }) {
         const nextSequence = (curMnemonicSequence + 1) % mnemonicSequence.length;
-        console.log('nextSequence', nextSequence);
-        console.log('mnemonicSequence', mnemonicSequence);
         const levelToShow = mnemonicSequence[nextSequence];
-        console.log('levelToShow', levelToShow);
         storage.get(levelToShow, function (levelData) {
-          console.log("levelData", levelData);
           const notes = levelData[levelToShow];
           storage.get('curNote', function ({ curNote }) {
-            console.log("curNote", curNote);
             const nextNote = (curNote[levelToShow] + 1) % notes.length;
-            console.log("nextNote", nextNote);
             view.showNoteQuestion(notes[nextNote].question);
             view.hideNoteAnswer();
             const updatedCurNote = {
@@ -119,7 +112,6 @@ const TabNotes = function () {
             storage.set({ 'curNote': updatedCurNote });
           });
         });
-        console.log('nextSequence', nextSequence);
         storage.set({ 'curMnemonicSequence': nextSequence });
       })
     })

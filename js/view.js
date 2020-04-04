@@ -22,7 +22,6 @@ export const View = function() {
   };
 
   this.hideNoteAnswer = function(answer) {
-    console.log('hidNoteAnswer');
     document.getElementById("show").classList.remove("hide");
     if (document.getElementById('answer') !== null) {
       document.getElementById('note').removeChild(
