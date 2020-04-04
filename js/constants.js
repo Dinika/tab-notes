@@ -1,13 +1,13 @@
 export const LevelEnum = {
-  EASY: "easy",
-  MEDIUM: "medium",
-  DIFFICULT: "difficult"
+  KNOWN: "known",
+  UNKNOWN: "unknown",
+  SKIPPED: "skipped"
 };
 
 export const mnemonicSequence = [
-  LevelEnum.DIFFICULT,
-  LevelEnum.DIFFICULT,
-  LevelEnum.MEDIUM,
-  LevelEnum.EASY,
-  LevelEnum.MEDIUM
+  LevelEnum.UNKNOWN,
+  LevelEnum.UNKNOWN,
+  LevelEnum.SKIPPED,
+  LevelEnum.KNOWN,
+  LevelEnum.UNKNOWN
 ];

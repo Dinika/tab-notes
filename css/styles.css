@@ -1,6 +1,6 @@
 body {
   background-color: black;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   color: white;
 }
 
@@ -11,17 +11,25 @@ h2 {
   font-weight: 200;
 }
 
+a {
+  cursor: pointer;
+}
+
+.main {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
 #note {
   min-width: 700px;
   max-width: 70vw;
   min-height: 40vh;
   padding: 32px;
   color: white;
-  border: 1px solid #C4C4C4;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  border: 1px solid #c4c4c4;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -29,14 +37,24 @@ h2 {
 }
 
 #question {
-  color: #1D5DEB;
+  color: #1d5deb;
   font-size: 28px;
 }
 
-#show {
-  color: #41EB52;
+#answer {
+  color: #c4c4c4;
   font-size: 20px;
-  cursor: pointer;
+}
+
+#show {
+  color: #41eb52;
+  font-size: 20px;
+}
+
+#levels-container {
+  color: #41eb52;
+  font-size: 20px;
+  margin-top: 16px;
 }
 
 footer {
@@ -56,8 +74,8 @@ footer {
 
 .left-section div {
   padding: 0 16px;
-  border-right: 3px solid #6A5D5D;
-  color: #C4C4C4;
+  border-right: 3px solid #6a5d5d;
+  color: #c4c4c4;
   cursor: pointer;
 }
 
@@ -65,7 +83,11 @@ footer {
   position: absolute;
   right: 0;
   padding: 0 16px;
-  color: #C4C4C4;
-  border-left: 3px solid #6A5D5D;
+  color: #c4c4c4;
+  border-left: 3px solid #6a5d5d;
   cursor: pointer;
+}
+
+.hide {
+  display: none;
 }
