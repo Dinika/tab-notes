@@ -1,0 +1,10 @@
+.TabNotes {
+  display: flex;
+  flex-direction: column;
+  background-color: #101010;
+  color: #6b716b;
+  font-size: 20px;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}

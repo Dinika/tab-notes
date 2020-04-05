@@ -1,0 +1,11 @@
+.category-selector {
+  margin-top: 16px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.category-button {
+  margin: 0 10px;
+  cursor: pointer;
+}

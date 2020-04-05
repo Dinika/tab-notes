@@ -1,0 +1,14 @@
+body {
+  background-color: black;
+  /* font-family: "Roboto Mono", monospace; */
+  color: white;
+  height: 100vh;
+}
+
+#root{
+  height: 100%;
+}
+
+a {
+  cursor: pointer;
+}

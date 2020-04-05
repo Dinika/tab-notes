@@ -1,0 +1,8 @@
+.actions-footer {
+  display: flex;
+  text-align: center;
+  cursor: pointer;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 80%;
+}
