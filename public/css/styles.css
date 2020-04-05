@@ -5,6 +5,10 @@ body {
   height: 100vh;
 }
 
-#root {
-  padding: 20px 0;
+#root{
+  height: 100%;
+}
+
+a {
+  cursor: pointer;
 }

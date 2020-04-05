@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TabNotes from './TabNotes';
+import TabNotes from './TabNotes/TabNotes';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
