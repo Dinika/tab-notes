@@ -18,7 +18,9 @@ export type TNote = {
   answer: String
 }
 
-export const INITIAL_NOTES: {[key in CategoryEnum]: TNote[]} = {
+export type TNotes = {[key in CategoryEnum]: TNote[]}
+
+export const INITIAL_NOTES: TNotes = {
   [CategoryEnum.UNKNOWN]: [
     {
       id: "1",
