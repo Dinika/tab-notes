@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NoteCategorySelector } from "./NoteCategorySelector";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import {
@@ -10,34 +10,53 @@ import {
 import "./styles.css";
 import { ActionsFooter } from "./ActionsFooter";
 import { NewNote } from "./NewNote";
+import * as Storage from "../Storage/storage";
+import { isShorthandPropertyAssignment } from "typescript";
+import { ConsoleWriter } from "istanbul-lib-report";
 
 function TabNotes() {
   const [notes, setNotes] = useState(INITIAL_NOTES);
   const [currentMnemonicIndex, setCurrentMnemonicIndex] = useState(0);
-
   const currentMnemonic = mnemonicSequence[currentMnemonicIndex];
   const currentNote = notes[currentMnemonic][0];
+  if (!currentNote) {
+    setCurrentMnemonicIndex(
+      getNextMnemonicIndex(currentMnemonicIndex, mnemonicSequence, notes)
+    );
+  }
+  useEffect(() => {
+    console.log("First useeffect");
+    Storage.setInitialized(false);
+    const data = Storage.getNotes();
+    if (!data) {
+      Storage.setNotes(INITIAL_NOTES);
+    }
+    setNotes(data ?? INITIAL_NOTES);
+  }, []);
 
-  function getNextMnemonicIndex({
-    currentMnemonicIndex,
-    mnemonicSequence,
-    notes,
-  }: {
-    currentMnemonicIndex: number;
-    mnemonicSequence: CategoryEnum[];
-    notes: TNotes;
-  }): number {
+  useEffect(() => {
+    console.log("Second useeffect");
+
+    if (Storage.isInitialized()) {
+      Storage.setNotes(notes);
+      console.log("Notes saved", notes);
+    } else {
+      Storage.setInitialized(true);
+    }
+  }, [notes]);
+
+  function getNextMnemonicIndex(
+    currentMnemonicIndex: number,
+    mnemonicSequence: CategoryEnum[],
+    notes: TNotes
+  ): number {
     const nextMnemonicIndex =
       (currentMnemonicIndex + 1) % mnemonicSequence.length;
     const nextMnemonicSequence = mnemonicSequence[nextMnemonicIndex];
     if (notes[nextMnemonicSequence].length > 0) {
       return nextMnemonicIndex;
     } else {
-      return getNextMnemonicIndex({
-        currentMnemonicIndex: nextMnemonicIndex,
-        mnemonicSequence,
-        notes,
-      });
+      return getNextMnemonicIndex(nextMnemonicIndex, mnemonicSequence, notes);
     }
   }
 
@@ -50,11 +69,11 @@ function TabNotes() {
         [currentMnemonic]: [...otherMnemonicNotes, currentNote],
       };
       setNotes(newNotes);
-      const nextMnemonicIndex = getNextMnemonicIndex({
+      const nextMnemonicIndex = getNextMnemonicIndex(
         currentMnemonicIndex,
         mnemonicSequence,
-        notes: newNotes,
-      });
+        newNotes
+      );
       setCurrentMnemonicIndex(nextMnemonicIndex);
       console.log("New notes", newNotes);
     } else {
@@ -66,11 +85,11 @@ function TabNotes() {
         [category]: [...skippedMnemonicNotes, currentNote],
       };
       setNotes(newNotes);
-      const nextMnemonicIndex = getNextMnemonicIndex({
+      const nextMnemonicIndex = getNextMnemonicIndex(
         currentMnemonicIndex,
         mnemonicSequence,
-        notes: newNotes,
-      });
+        newNotes
+      );
       setCurrentMnemonicIndex(nextMnemonicIndex);
       console.log("New notes", newNotes);
     }
