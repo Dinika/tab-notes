@@ -13,9 +13,3 @@ digital flashcards
 ## License
 
 MIT License
-
-## Author :angel:
-
-Dinika Saxena
-
-- e-mail: dinika.saxenas@gmail.com
