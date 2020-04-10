@@ -2,8 +2,8 @@ chrome.runtime.onInstalled.addListener(fetchAndStoreNotes);
 
 async function fetchAndStoreNotes() {
   const installedOn = new Date();
-  chrome.storage.sync.set(
-    {
+  window.localStorage.setItem('tabNotes',
+    JSON.stringify({
       ...INITIAL_CARDS,
       mnemonicSequence: mnemonicSequence,
       lastNoteOfTheDayFetchedAt: installedOn.toDateString(),
@@ -13,14 +13,8 @@ async function fetchAndStoreNotes() {
         skipped: 0,
       },
       curMnemonicSequence: 0
-    },
-    function () {
-      //TODO: Remove this function
-      chrome.storage.sync.get(null, function (data) {
-        console.log("storage data", data);
-      });
-    }
-  );
+    })
+  )
 }
 
 const INITIAL_CARDS = {
