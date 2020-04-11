@@ -17,6 +17,12 @@ export type TNote = {
   answer: String;
 };
 
+export interface TNoteFetchedAt {
+  day: number;
+  month: number;
+  year: number;
+}
+
 export type TNotes = { [key in CategoryEnum]: TNote[] };
 
 export const INITIAL_NOTES: TNotes = {

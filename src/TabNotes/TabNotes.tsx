@@ -13,37 +13,40 @@ import { NewNote } from "./NewNote";
 import * as Storage from "../Storage/storage";
 import { isShorthandPropertyAssignment } from "typescript";
 import { ConsoleWriter } from "istanbul-lib-report";
+import { NoteOfTheDay } from "./NoteOfTheDay";
 
 function TabNotes() {
-  const [notes, setNotes] = useState(INITIAL_NOTES);
+  const [dummy, setDummy] = useState(0)
+  useEffect(()=>{
+    console.log("Dummyyyy", dummy)
+  }, [dummy])
+  const [notes, setNotes] = useState(() => {
+    const data = Storage.getNotes();
+    if (!data) {
+      Storage.setNotes(INITIAL_NOTES);
+    }
+    return data ?? INITIAL_NOTES;
+  });
   const [currentMnemonicIndex, setCurrentMnemonicIndex] = useState(0);
   const currentMnemonic = mnemonicSequence[currentMnemonicIndex];
   const currentNote = notes[currentMnemonic][0];
+  const [lastNoteOfTheDayFetchedAt, setLastNoteOfTheDayFetchedAt] = useState(
+    Storage.getLastNoteOfTheDayFetchedAt()
+  );
   if (!currentNote) {
     setCurrentMnemonicIndex(
       getNextMnemonicIndex(currentMnemonicIndex, mnemonicSequence, notes)
     );
   }
-  useEffect(() => {
-    console.log("First useeffect");
-    Storage.setInitialized(false);
-    const data = Storage.getNotes();
-    if (!data) {
-      Storage.setNotes(INITIAL_NOTES);
-    }
-    setNotes(data ?? INITIAL_NOTES);
-  }, []);
 
   useEffect(() => {
     console.log("Second useeffect");
-
-    if (Storage.isInitialized()) {
-      Storage.setNotes(notes);
-      console.log("Notes saved", notes);
-    } else {
-      Storage.setInitialized(true);
-    }
+    Storage.setNotes(notes);
   }, [notes]);
+
+  useEffect(() => {
+    Storage.setLastNoteOfTheDayFetchedAt(new Date());
+  }, [lastNoteOfTheDayFetchedAt]);
 
   function getNextMnemonicIndex(
     currentMnemonicIndex: number,
@@ -58,6 +61,20 @@ function TabNotes() {
     } else {
       return getNextMnemonicIndex(nextMnemonicIndex, mnemonicSequence, notes);
     }
+  }
+
+  function shouldFetchNoteOfTheDay() {
+    console.log("Should fetch?")
+    const { day, month, year } = lastNoteOfTheDayFetchedAt;
+    const lastNoteSavedDate = new Date(year, month, day);
+    const now = new Date();
+    const normalizedNow = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate()
+    );
+    console.log("normalizedNow ", normalizedNow, "lastNoteSavedDate ", lastNoteSavedDate, "Should it then", normalizedNow > lastNoteSavedDate)
+    return normalizedNow >= lastNoteSavedDate;
   }
 
   function onCategorySelected(category: CategoryEnum) {
@@ -105,11 +122,15 @@ function TabNotes() {
             <NewNote notes={notes} setNotes={setNotes} />
           </Route>
           <Route path="/">
-            <NoteCategorySelector
-              currentNote={currentNote}
-              currentMnemonic={currentMnemonic}
-              onCategorySelected={onCategorySelected}
-            />
+            {shouldFetchNoteOfTheDay() ? (
+              <NoteOfTheDay onNoteAccepted = {() => {}} onNoteRejected={() => {}}/>
+            ) : (
+              <NoteCategorySelector
+                currentNote={currentNote}
+                currentMnemonic={currentMnemonic}
+                onCategorySelected={onCategorySelected}
+              />
+            )}
           </Route>
         </Switch>
         <ActionsFooter />
