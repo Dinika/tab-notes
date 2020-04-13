@@ -17,9 +17,6 @@ import { NoteOfTheDay } from "./NoteOfTheDay";
 
 function TabNotes() {
   const [dummy, setDummy] = useState(0)
-  useEffect(()=>{
-    console.log("Dummyyyy", dummy)
-  }, [dummy])
   const [notes, setNotes] = useState(() => {
     const data = Storage.getNotes();
     if (!data) {
