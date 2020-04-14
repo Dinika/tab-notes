@@ -6,6 +6,7 @@ import {
   mnemonicSequence,
   CategoryEnum,
   TNotes,
+  TNote,
 } from "./constants";
 import "./styles.css";
 import { ActionsFooter } from "./ActionsFooter";
@@ -16,7 +17,7 @@ import { ConsoleWriter } from "istanbul-lib-report";
 import { NoteOfTheDay } from "./NoteOfTheDay";
 
 function TabNotes() {
-  const [dummy, setDummy] = useState(0)
+  const [dummy, setDummy] = useState(0);
   const [notes, setNotes] = useState(() => {
     const data = Storage.getNotes();
     if (!data) {
@@ -61,7 +62,7 @@ function TabNotes() {
   }
 
   function shouldFetchNoteOfTheDay() {
-    console.log("Should fetch?")
+    console.log("Should fetch?");
     const { day, month, year } = lastNoteOfTheDayFetchedAt;
     const lastNoteSavedDate = new Date(year, month, day);
     const now = new Date();
@@ -70,8 +71,15 @@ function TabNotes() {
       now.getMonth(),
       now.getDate()
     );
-    console.log("normalizedNow ", normalizedNow, "lastNoteSavedDate ", lastNoteSavedDate, "Should it then", normalizedNow > lastNoteSavedDate)
-    return normalizedNow >= lastNoteSavedDate;
+    console.log(
+      "normalizedNow ",
+      normalizedNow,
+      "lastNoteSavedDate ",
+      lastNoteSavedDate,
+      "Should it then",
+      normalizedNow > lastNoteSavedDate
+    );
+    return normalizedNow > lastNoteSavedDate;
   }
 
   function onCategorySelected(category: CategoryEnum) {
@@ -109,6 +117,15 @@ function TabNotes() {
     }
   }
 
+  function onNoteAccepted(newNote: TNote) {
+    const newNotes = {
+      ...notes,
+      [CategoryEnum.UNKNOWN]: [...notes[CategoryEnum.UNKNOWN], newNote],
+    };
+    Storage.setLastNoteOfTheDayFetchedAt(new Date());
+    setNotes(newNotes);
+  }
+
   return (
     <div className="TabNotes">
       <div className="upper-title">/ Tab Notes /</div>
@@ -120,7 +137,12 @@ function TabNotes() {
           </Route>
           <Route path="/">
             {shouldFetchNoteOfTheDay() ? (
-              <NoteOfTheDay onNoteAccepted = {() => {}} onNoteRejected={() => {}}/>
+              <NoteOfTheDay
+                onNoteAccepted={onNoteAccepted}
+                onNoteRejected={() => {
+                  Storage.setLastNoteOfTheDayFetchedAt(new Date());
+                }}
+              />
             ) : (
               <NoteCategorySelector
                 currentNote={currentNote}
