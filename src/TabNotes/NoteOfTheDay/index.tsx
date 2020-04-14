@@ -3,7 +3,7 @@ import { TNote, CategoryEnum } from "../constants";
 import { Note } from "../NoteCategorySelector/Note";
 
 interface NoteOfTheDayProps {
-  onNoteAccepted: () => void;
+  onNoteAccepted: (newNote: TNote) => void;
   onNoteRejected: () => void;
 }
 
