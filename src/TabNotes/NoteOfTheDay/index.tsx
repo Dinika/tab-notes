@@ -16,26 +16,53 @@ export function NoteOfTheDay({
   onNoteAccepted,
   onNoteRejected,
 }: NoteOfTheDayProps) {
-  const [noteOfTheDay, setNoteOfTheDay] = useState<TNote | undefined>(undefined)
+  const [noteOfTheDay, setNoteOfTheDay] = useState<TNote | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     // TODO: Maybe move the api call to another file
-    fetch('https://cors-anywhere.herokuapp.com/http://urban-word-of-the-day.herokuapp.com')
-      .then(noteData => {
-        return noteData.json()
+    fetch(
+      "https://cors-anywhere.herokuapp.com/http://urban-word-of-the-day.herokuapp.com"
+    )
+      .then((noteData) => {
+        return noteData.json();
       })
       .then((incomingNote: IncomingNote) => {
-        const note = {question: incomingNote.word, answer: incomingNote.meaning}
-        setNoteOfTheDay(note)  
+        const note = {
+          question: incomingNote.word,
+          answer: incomingNote.meaning,
+        };
+        setNoteOfTheDay(note);
       })
-      .catch(err => {
-        console.log(err)
-      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   return (
     <div className="note-category-selector">
-      {noteOfTheDay ? <Note note={noteOfTheDay}/> : <p>Loading</p>}
+      {noteOfTheDay ? <Note note={noteOfTheDay} /> : <p>Loading</p>}
+      {noteOfTheDay && (
+        <div className="category-selector">
+          <div
+            className="category-button"
+            role="button"
+            id="reject"
+            onClick={onNoteRejected}
+          >
+            Reject /
+          </div>
+          <div
+            role="button"
+            id="accept"
+            className="category-button"
+            onClick={() => onNoteAccepted(noteOfTheDay)}
+          >
+            Accept
+          </div>
+        </div>
+      )}
     </div>
   );
 }
