@@ -118,11 +118,24 @@ function TabNotes() {
   }
 
   function onNoteAccepted(newNote: TNote) {
+    // Refactor and add similar logic to onNoteRejected
     const newNotes = {
       ...notes,
       [CategoryEnum.UNKNOWN]: [...notes[CategoryEnum.UNKNOWN], newNote],
     };
-    Storage.setLastNoteOfTheDayFetchedAt(new Date());
+    const now = new Date();
+    const noteFetchedAt = {
+      day: now.getDate(),
+      month: now.getMonth(),
+      year: now.getFullYear(),
+    };
+    setLastNoteOfTheDayFetchedAt(noteFetchedAt)
+    const nextMnemonicIndex = getNextMnemonicIndex(
+      currentMnemonicIndex,
+      mnemonicSequence,
+      newNotes
+    );
+    setCurrentMnemonicIndex(nextMnemonicIndex);
     setNotes(newNotes);
   }
 
