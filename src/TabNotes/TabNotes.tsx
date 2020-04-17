@@ -129,7 +129,7 @@ function TabNotes() {
       month: now.getMonth(),
       year: now.getFullYear(),
     };
-    setLastNoteOfTheDayFetchedAt(noteFetchedAt)
+    setLastNoteOfTheDayFetchedAt(noteFetchedAt);
     const nextMnemonicIndex = getNextMnemonicIndex(
       currentMnemonicIndex,
       mnemonicSequence,
@@ -137,6 +137,22 @@ function TabNotes() {
     );
     setCurrentMnemonicIndex(nextMnemonicIndex);
     setNotes(newNotes);
+  }
+
+  function onNoteRejected() {
+    const now = new Date();
+    const noteFetchedAt = {
+      day: now.getDate(),
+      month: now.getMonth(),
+      year: now.getFullYear(),
+    };
+    setLastNoteOfTheDayFetchedAt(noteFetchedAt);
+    const nextMnemonicIndex = getNextMnemonicIndex(
+      currentMnemonicIndex,
+      mnemonicSequence,
+      notes
+    );
+    setCurrentMnemonicIndex(nextMnemonicIndex);
   }
 
   return (
@@ -152,9 +168,7 @@ function TabNotes() {
             {shouldFetchNoteOfTheDay() ? (
               <NoteOfTheDay
                 onNoteAccepted={onNoteAccepted}
-                onNoteRejected={() => {
-                  Storage.setLastNoteOfTheDayFetchedAt(new Date());
-                }}
+                onNoteRejected={onNoteRejected}
               />
             ) : (
               <NoteCategorySelector
