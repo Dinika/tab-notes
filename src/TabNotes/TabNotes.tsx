@@ -17,7 +17,6 @@ import { ConsoleWriter } from "istanbul-lib-report";
 import { NoteOfTheDay } from "./NoteOfTheDay";
 
 function TabNotes() {
-  const [dummy, setDummy] = useState(0);
   const [notes, setNotes] = useState(() => {
     const data = Storage.getNotes();
     if (!data) {
@@ -25,12 +24,13 @@ function TabNotes() {
     }
     return data ?? INITIAL_NOTES;
   });
-  const [currentMnemonicIndex, setCurrentMnemonicIndex] = useState(0);
-  const currentMnemonic = mnemonicSequence[currentMnemonicIndex];
-  const currentNote = notes[currentMnemonic][0];
   const [lastNoteOfTheDayFetchedAt, setLastNoteOfTheDayFetchedAt] = useState(
     Storage.getLastNoteOfTheDayFetchedAt()
   );
+  const [currentMnemonicIndex, setCurrentMnemonicIndex] = useState(0);
+  
+  const currentMnemonic = mnemonicSequence[currentMnemonicIndex];
+  const currentNote = notes[currentMnemonic][0];
   if (!currentNote) {
     setCurrentMnemonicIndex(
       getNextMnemonicIndex(currentMnemonicIndex, mnemonicSequence, notes)
@@ -38,49 +38,12 @@ function TabNotes() {
   }
 
   useEffect(() => {
-    console.log("Second useeffect");
     Storage.setNotes(notes);
   }, [notes]);
 
   useEffect(() => {
     Storage.setLastNoteOfTheDayFetchedAt(new Date());
   }, [lastNoteOfTheDayFetchedAt]);
-
-  function getNextMnemonicIndex(
-    currentMnemonicIndex: number,
-    mnemonicSequence: CategoryEnum[],
-    notes: TNotes
-  ): number {
-    const nextMnemonicIndex =
-      (currentMnemonicIndex + 1) % mnemonicSequence.length;
-    const nextMnemonicSequence = mnemonicSequence[nextMnemonicIndex];
-    if (notes[nextMnemonicSequence].length > 0) {
-      return nextMnemonicIndex;
-    } else {
-      return getNextMnemonicIndex(nextMnemonicIndex, mnemonicSequence, notes);
-    }
-  }
-
-  function shouldFetchNoteOfTheDay() {
-    console.log("Should fetch?");
-    const { day, month, year } = lastNoteOfTheDayFetchedAt;
-    const lastNoteSavedDate = new Date(year, month, day);
-    const now = new Date();
-    const normalizedNow = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate()
-    );
-    console.log(
-      "normalizedNow ",
-      normalizedNow,
-      "lastNoteSavedDate ",
-      lastNoteSavedDate,
-      "Should it then",
-      normalizedNow > lastNoteSavedDate
-    );
-    return normalizedNow > lastNoteSavedDate;
-  }
 
   function onCategorySelected(category: CategoryEnum) {
     if (currentMnemonic === category) {
@@ -118,7 +81,6 @@ function TabNotes() {
   }
 
   function onNoteAccepted(newNote: TNote) {
-    // Refactor and add similar logic to onNoteRejected
     const newNotes = {
       ...notes,
       [CategoryEnum.UNKNOWN]: [...notes[CategoryEnum.UNKNOWN], newNote],
@@ -129,13 +91,12 @@ function TabNotes() {
       month: now.getMonth(),
       year: now.getFullYear(),
     };
+
+    // Updating the state "lastNoteOfTheDayFetchedAt" & "notes", causes the React component to
+    // re-render. In the next render, the "shouldFetchNoteOfTheDay" returns false, and the currentNote (`notes[currentMnemonic][0]`)
+    // is rendered on screen. Recalculating and setting `currentMnemonicIndex` is not necessary.
+
     setLastNoteOfTheDayFetchedAt(noteFetchedAt);
-    const nextMnemonicIndex = getNextMnemonicIndex(
-      currentMnemonicIndex,
-      mnemonicSequence,
-      newNotes
-    );
-    setCurrentMnemonicIndex(nextMnemonicIndex);
     setNotes(newNotes);
   }
 
@@ -147,12 +108,42 @@ function TabNotes() {
       year: now.getFullYear(),
     };
     setLastNoteOfTheDayFetchedAt(noteFetchedAt);
-    const nextMnemonicIndex = getNextMnemonicIndex(
-      currentMnemonicIndex,
-      mnemonicSequence,
-      notes
+  }
+
+  function getNextMnemonicIndex(
+    currentMnemonicIndex: number,
+    mnemonicSequence: CategoryEnum[],
+    notes: TNotes
+  ): number {
+    const nextMnemonicIndex =
+      (currentMnemonicIndex + 1) % mnemonicSequence.length;
+    const nextMnemonicSequence = mnemonicSequence[nextMnemonicIndex];
+    if (notes[nextMnemonicSequence].length > 0) {
+      return nextMnemonicIndex;
+    } else {
+      return getNextMnemonicIndex(nextMnemonicIndex, mnemonicSequence, notes);
+    }
+  }
+
+  function shouldFetchNoteOfTheDay() {
+    console.log("Should fetch?");
+    const { day, month, year } = lastNoteOfTheDayFetchedAt;
+    const lastNoteSavedDate = new Date(year, month, day);
+    const now = new Date();
+    const normalizedNow = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate()
     );
-    setCurrentMnemonicIndex(nextMnemonicIndex);
+    console.log(
+      "normalizedNow ",
+      normalizedNow,
+      "lastNoteSavedDate ",
+      lastNoteSavedDate,
+      "Should it then",
+      normalizedNow > lastNoteSavedDate
+    );
+    return normalizedNow > lastNoteSavedDate;
   }
 
   return (
