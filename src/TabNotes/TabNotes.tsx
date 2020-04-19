@@ -35,7 +35,6 @@ function TabNotes() {
   }, []);
 
   useEffect(() => {
-    console.log("Second useeffect");
 
     if (Storage.isInitialized()) {
       Storage.setNotes(notes);
