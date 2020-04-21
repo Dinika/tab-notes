@@ -6,7 +6,7 @@ export function NewNote({
   setNotes,
 }: {
   notes: TNotes;
-  setNotes: (notes: TNotes) => void;
+  setNotes(notes: TNotes): void;
 }) {
   const [questionValue, setQuestionValue] = useState("");
   const [answerValue, setAnswerValue] = useState("");

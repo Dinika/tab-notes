@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles.css";
-import { CategoryEnum } from "../../constants";
+import { CategoryEnum } from "../../../constants";
 
 export function CategorySelector({
   onCategorySelected,
