@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { TNote, CategoryEnum } from "../constants";
+import { TNote } from "../../constants";
 import { Note } from "../NoteCategorySelector/Note";
+import { extractWordOfTheDay } from "./utils";
 
 interface NoteOfTheDayProps {
   onNoteAccepted: (newNote: TNote) => void;
   onNoteRejected: () => void;
-}
-
-interface IncomingNote {
-  word: string;
-  meaning: string;
 }
 
 export function NoteOfTheDay({
@@ -22,13 +18,12 @@ export function NoteOfTheDay({
 
   useEffect(() => {
     // TODO: Maybe move the api call to another file
-    fetch(
-      "https://cors-anywhere.herokuapp.com/http://urban-word-of-the-day.herokuapp.com"
-    )
-      .then((noteData) => {
-        return noteData.json();
+    fetch("https://cors-anywhere.herokuapp.com/https://www.urbandictionary.com")
+      .then(rawData => {
+        return rawData.text();
       })
-      .then((incomingNote: IncomingNote) => {
+      .then((rawDataPart2: string) => {
+        const incomingNote = extractWordOfTheDay(rawDataPart2)
         const note = {
           question: incomingNote.word,
           answer: incomingNote.meaning,

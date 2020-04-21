@@ -1,4 +1,4 @@
-import { TNote } from "../../constants";
+import { TNote } from "../../../constants";
 import "./styles.css";
 import { useState, useEffect } from "react";
 import React from "react";
