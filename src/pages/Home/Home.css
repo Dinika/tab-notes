@@ -1,19 +1,19 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  font-size: 16px;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    font-size: 16px;
 }
 
 .card {
-  padding: 2em;
-  background-color: rgb(11, 8, 8);
-  border-radius: 3.5rem;
-  min-height: 40vh;
-  min-width: 50vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1rem;
+    padding: 2em;
+    background-color: rgb(11, 8, 8);
+    border-radius: 3.5rem;
+    min-height: 40vh;
+    min-width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
 }

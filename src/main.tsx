@@ -5,11 +5,11 @@ import "./index.css";
 import HomePage from "./pages/Home/Home";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route index element={<HomePage />} />
-      </Routes>
-    </BrowserRouter>
-  </StrictMode>,
+    <StrictMode>
+        <BrowserRouter>
+            <Routes>
+                <Route index element={<HomePage />} />
+            </Routes>
+        </BrowserRouter>
+    </StrictMode>,
 );

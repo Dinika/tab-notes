@@ -9,27 +9,27 @@ import { getLastWordOfTheDayFetchedAt } from "./local-storage";
  * - The word was fetched before today midnight.
  */
 export async function shouldFetchWordOfTheDay(): Promise<boolean> {
-  const lastWordOfTheDayFetchedAt = getLastWordOfTheDayFetchedAt();
+    const lastWordOfTheDayFetchedAt = getLastWordOfTheDayFetchedAt();
 
-  if (null === lastWordOfTheDayFetchedAt) {
-    return true;
-  }
+    if (null === lastWordOfTheDayFetchedAt) {
+        return true;
+    }
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-  return lastWordOfTheDayFetchedAt < today;
+    return lastWordOfTheDayFetchedAt < today;
 }
 
 export async function fetchWordOfTheDay(): Promise<WordnikWord> {
-  const apiKey = import.meta.env.VITE_WORDNIK_API_KEY;
+    const apiKey = import.meta.env.VITE_WORDNIK_API_KEY;
 
-  return fetch(
-    `https://api.wordnik.com/v4/words.json/wordOfTheDay?api_key=${apiKey}`,
-    {
-      headers: {
-        Accept: "application/json",
-      },
-    },
-  ).then((response) => response.json());
+    return fetch(
+        `https://api.wordnik.com/v4/words.json/wordOfTheDay?api_key=${apiKey}`,
+        {
+            headers: {
+                Accept: "application/json",
+            },
+        },
+    ).then((response) => response.json());
 }
