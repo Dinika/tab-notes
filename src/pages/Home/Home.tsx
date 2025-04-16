@@ -88,25 +88,41 @@ function HomePage() {
         setMode("question");
     };
 
+    const deleteCard = (card: Card) => {
+        setCard(null);
+        removeCardFromDeck(card.id, card.category);
+        showNextCard();
+    };
+
     return (
         <div className="card">
             {loadingText && <p>{loadingText}</p>}
             {error && <p>{error}</p>}
-            {card &&
-                (mode === "question" ? (
-                    <QuestionCard
-                        currentCategory={card.category}
-                        question={card.question}
-                        onCategorySelected={(category) =>
-                            onCategorySelected(card, category)
-                        }
-                    />
-                ) : (
-                    <AnswerCard
-                        answer={card.answer}
-                        onNextClick={showNextCard}
-                    />
-                ))}
+            {card && (
+                <>
+                    <button
+                        className="discard-button"
+                        title="Delete card"
+                        onClick={() => deleteCard(card)}
+                    >
+                        🗑️
+                    </button>
+                    {mode === "question" ? (
+                        <QuestionCard
+                            currentCategory={card.category}
+                            question={card.question}
+                            onCategorySelected={(category) =>
+                                onCategorySelected(card, category)
+                            }
+                        />
+                    ) : (
+                        <AnswerCard
+                            answer={card.answer}
+                            onNextClick={showNextCard}
+                        />
+                    )}
+                </>
+            )}
         </div>
     );
 }

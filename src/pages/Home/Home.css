@@ -7,13 +7,29 @@
 }
 
 .card {
+    position: relative;
     padding: 2em;
     background-color: rgb(39, 39, 39);
     border-radius: 3.5rem;
     min-height: 40vh;
     min-width: 50vw;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 1rem;
+}
+
+.discard-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: 3px solid rgb(30, 30, 30);
 }
