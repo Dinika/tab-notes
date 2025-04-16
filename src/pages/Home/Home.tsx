@@ -34,9 +34,12 @@ function HomePage() {
                 try {
                     const wordOfTheDay = await fetchWordOfTheDay();
                     setLastWordOfTheDayFetchedAt(new Date());
-                    const card = { ...wordnikWordToCard(wordOfTheDay) };
-                    addCardToDeck(card, Category.Difficult);
-                    setCard(card);
+                    const wordOfTheDayCard = {
+                        ...wordnikWordToCard(wordOfTheDay),
+                    };
+                    addCardToDeck(wordOfTheDayCard, Category.Difficult, true);
+
+                    setCard(wordOfTheDayCard);
                     return;
                 } catch (err) {
                     console.error(err);

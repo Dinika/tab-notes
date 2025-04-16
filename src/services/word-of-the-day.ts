@@ -10,7 +10,6 @@ import { getLastWordOfTheDayFetchedAt } from "./local-storage";
  */
 export async function shouldFetchWordOfTheDay(): Promise<boolean> {
     const lastWordOfTheDayFetchedAt = getLastWordOfTheDayFetchedAt();
-
     if (null === lastWordOfTheDayFetchedAt) {
         return true;
     }

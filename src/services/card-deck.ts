@@ -20,12 +20,10 @@ export function getRandomCardFromDeck(): Card | null {
         WeightedCardCategories[
             Math.floor(Math.random() * WeightedCardCategories.length)
         ];
-    console.log("Random category", category);
     let deck = getCategoryDeck(category);
 
     // If there are no cards in this deck find a card in any other deck
     if (null === deck) {
-        console.log("No cards in deck ", category);
         deck =
             categories
                 .filter((c) => c !== category)
@@ -41,10 +39,21 @@ export function getRandomCardFromDeck(): Card | null {
     return deck[0];
 }
 
-export function addCardToDeck(card: Card, category: TCategory) {
+export function addCardToDeck(
+    card: Card,
+    category: TCategory,
+    ignoreIfQuestionExists?: boolean,
+) {
     let deck = getCategoryDeck(category);
     if (null === deck) {
         deck = [];
+    }
+
+    if (
+        ignoreIfQuestionExists &&
+        deck.find((c) => c.question === card.question)
+    ) {
+        return;
     }
 
     // Deck is a queue. Since this is a new card it should be added at the end of the deck so that it is last one to be picked.
