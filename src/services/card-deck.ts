@@ -20,10 +20,12 @@ export function getRandomCardFromDeck(): Card | null {
         WeightedCardCategories[
             Math.floor(Math.random() * WeightedCardCategories.length)
         ];
+    console.log("Random category", category);
     let deck = getCategoryDeck(category);
 
     // If there are no cards in this deck find a card in any other deck
     if (null === deck) {
+        console.log("No cards in deck ", category);
         deck =
             categories
                 .filter((c) => c !== category)

@@ -13,6 +13,7 @@ import {
 } from "../../services/card-deck";
 import { setLastWordOfTheDayFetchedAt } from "../../services/local-storage";
 import QuestionCard from "../../components/QuestionCard";
+import AnswerCard from "../../components/AnswerCard";
 
 function HomePage() {
     const [card, setCard] = useState<Card | null>(null);
@@ -70,9 +71,21 @@ function HomePage() {
 
     const onCategorySelected = (card: Card, category: TCategory) => {
         removeCardFromDeck(card.id, card.category);
-        addCardToDeck(card, category);
+        addCardToDeck({ ...card, category }, category);
 
         setMode("answer");
+    };
+
+    const showNextCard = async () => {
+        const newCard = await getRandomCardFromDeck();
+        if (null === newCard) {
+            setError("There are no cards in the deck");
+            return;
+        }
+        setCard({
+            ...newCard,
+        });
+        setMode("question");
     };
 
     return (
@@ -82,13 +95,17 @@ function HomePage() {
             {card &&
                 (mode === "question" ? (
                     <QuestionCard
+                        currentCategory={card.category}
                         question={card.question}
                         onCategorySelected={(category) =>
                             onCategorySelected(card, category)
                         }
                     />
                 ) : (
-                    <p>{card.answer}</p>
+                    <AnswerCard
+                        answer={card.answer}
+                        onNextClick={showNextCard}
+                    />
                 ))}
         </div>
     );

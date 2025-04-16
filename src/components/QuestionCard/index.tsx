@@ -3,27 +3,34 @@ import "./style.css";
 
 interface QuestionCardProps {
     question: string;
+    currentCategory: string;
     onCategorySelected: (category: TCategory) => void;
 }
 
-const categories = [
-    { name: Category.Easy, color: "#3FC37D" },
-    { name: Category.Medium, color: "#FFD154" },
-    { name: Category.Difficult, color: "#FC724C" },
-];
+const categories = [Category.Easy, Category.Medium, Category.Difficult];
 
-function QuestionCard({ question, onCategorySelected }: QuestionCardProps) {
+function QuestionCard({
+    question,
+    onCategorySelected,
+    currentCategory,
+}: QuestionCardProps) {
     return (
         <div className="container">
             <div className="question">{question}</div>
             <div className="categories">
                 {categories.map((category) => (
                     <button
-                        key={category.name}
-                        className={`category ${category.name}`}
-                        onClick={() => onCategorySelected(category.name)}
+                        key={category}
+                        className={`category ${category} ${currentCategory === category ? "selected" : ""}`}
+                        onClick={() => onCategorySelected(category)}
                     >
-                        {category.name}
+                        {category}
+                        <span
+                            className="current-category-mark"
+                            title="current category"
+                        >
+                            {currentCategory === category ? "🟡" : ""}
+                        </span>
                     </button>
                 ))}
             </div>

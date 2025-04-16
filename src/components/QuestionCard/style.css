@@ -28,3 +28,7 @@
 .difficult {
     background-color: #fc724c;
 }
+
+.current-category-mark {
+    margin-left: 10px;
+}
