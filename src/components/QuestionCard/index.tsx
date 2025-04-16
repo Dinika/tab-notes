@@ -1,13 +1,15 @@
-import './style.css';
+import "./style.css";
 
 interface QuestionCardProps {
-    question: string;
+  question: string;
 }
 
-function QuestionCard({question}: QuestionCardProps) {
-    return <div>
-        <div className='question'>{question}</div>
+function QuestionCard({ question }: QuestionCardProps) {
+  return (
+    <div>
+      <div className="question">{question}</div>
     </div>
+  );
 }
 
 export default QuestionCard;

@@ -1,32 +1,35 @@
-import { WordnikWord } from '../types';
-import { getLastWordOfTheDayFetchedAt } from './local-storage';
+import { WordnikWord } from "../types";
+import { getLastWordOfTheDayFetchedAt } from "./local-storage";
 
 /**
  * Determines if new word of the day should be fetched from the wordnik API.
  * A new word if fetched iff:
- * 
+ *
  * - No word was fetched from the api before (ie the 'lastWordOfTheDayFetchedAt' is null in LS)
- * - The word was fetched before today midnight. 
+ * - The word was fetched before today midnight.
  */
 export async function shouldFetchWordOfTheDay(): Promise<boolean> {
-    const lastWordOfTheDayFetchedAt = getLastWordOfTheDayFetchedAt();
-    
-    if (null === lastWordOfTheDayFetchedAt) {
-        return true;
-    }
+  const lastWordOfTheDayFetchedAt = getLastWordOfTheDayFetchedAt();
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+  if (null === lastWordOfTheDayFetchedAt) {
+    return true;
+  }
 
-    return lastWordOfTheDayFetchedAt < today;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  return lastWordOfTheDayFetchedAt < today;
 }
 
 export async function fetchWordOfTheDay(): Promise<WordnikWord> {
-    const apiKey = import.meta.env.VITE_WORDNIK_API_KEY;
+  const apiKey = import.meta.env.VITE_WORDNIK_API_KEY;
 
-    return fetch(`https://api.wordnik.com/v4/words.json/wordOfTheDay?api_key=${apiKey}`, {
-        headers: {
-            "Accept": "application/json",
-        },
-    }).then(response => response.json())
+  return fetch(
+    `https://api.wordnik.com/v4/words.json/wordOfTheDay?api_key=${apiKey}`,
+    {
+      headers: {
+        Accept: "application/json",
+      },
+    },
+  ).then((response) => response.json());
 }
