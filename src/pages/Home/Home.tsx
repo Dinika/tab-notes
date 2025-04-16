@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import "./Home.css";
-import { Card, Category } from "../../types";
+import { Card, Category, TCategory } from "../../types";
 import {
     fetchWordOfTheDay,
     shouldFetchWordOfTheDay,
 } from "../../services/word-of-the-day";
 import { wordnikWordToCard } from "../../services/common";
-import { addCardToDeck, getRandomCardFromDeck } from "../../services/card-deck";
+import {
+    addCardToDeck,
+    getRandomCardFromDeck,
+    removeCardFromDeck,
+} from "../../services/card-deck";
 import { setLastWordOfTheDayFetchedAt } from "../../services/local-storage";
 import QuestionCard from "../../components/QuestionCard";
 
@@ -64,13 +68,25 @@ function HomePage() {
         getInitialCard();
     }, []);
 
+    const onCategorySelected = (card: Card, category: TCategory) => {
+        removeCardFromDeck(card.id, card.category);
+        addCardToDeck(card, category);
+
+        setMode("answer");
+    };
+
     return (
         <div className="card">
             {loadingText && <p>{loadingText}</p>}
             {error && <p>{error}</p>}
             {card &&
                 (mode === "question" ? (
-                    <QuestionCard question={card.question} />
+                    <QuestionCard
+                        question={card.question}
+                        onCategorySelected={(category) =>
+                            onCategorySelected(card, category)
+                        }
+                    />
                 ) : (
                     <p>{card.answer}</p>
                 ))}

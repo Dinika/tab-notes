@@ -49,3 +49,13 @@ export function addCardToDeck(card: Card, category: TCategory) {
     deck.push(card);
     saveDeckToCategory(category, deck);
 }
+
+export function removeCardFromDeck(id: string, category: TCategory) {
+    let deck = getCategoryDeck(category);
+    if (null === deck) {
+        return;
+    }
+
+    deck = deck.filter((d) => d.id !== id);
+    saveDeckToCategory(category, deck);
+}

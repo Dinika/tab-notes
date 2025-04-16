@@ -2,3 +2,29 @@
     font-size: 3rem;
     font-weight: 700;
 }
+
+.categories {
+    margin-top: 50px;
+}
+
+.category {
+    margin: 20px;
+    border-radius: 50px;
+    height: 3rem;
+    width: 12rem;
+    border: 0.25rem solid black;
+    color: black;
+    font-weight: 600;
+}
+
+.easy {
+    background-color: #3fc37d;
+}
+
+.medium {
+    background-color: #87c5e1;
+}
+
+.difficult {
+    background-color: #fc724c;
+}
