@@ -1,13 +1,15 @@
 import "./style.css";
 
 interface AnswerProps {
+    question: string;
     answer: string;
     onNextClick: () => void;
 }
 
-function AnswerCard({ answer, onNextClick }: AnswerProps) {
+function AnswerCard({ question, answer, onNextClick }: AnswerProps) {
     return (
         <div>
+            <h3>{question}</h3>
             <div
                 dangerouslySetInnerHTML={{ __html: answer }}
                 className="answer"

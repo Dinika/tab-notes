@@ -47,7 +47,11 @@ function DeleteCardModal({
     }, [onCancel]);
 
     return (
-        <dialog ref={dialogRef} id="add-card-dialog" className="modal-backdrop">
+        <dialog
+            ref={dialogRef}
+            id="delete-card-dialog"
+            className="modal-backdrop"
+        >
             <h3>Are you sure you want to delete this card?</h3>
             <div className="card-details">
                 <div className="row">

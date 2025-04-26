@@ -27,8 +27,9 @@ dialog {
     text-align: left;
 }
 
-.answer {
+#delete-card-dialog .answer {
     border: 1px solid #3e3e3e;
+    padding: 0.5rem;
 }
 
 .modal-actions {

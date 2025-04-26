@@ -14,12 +14,14 @@ import {
 import { setLastWordOfTheDayFetchedAt } from "../../services/local-storage";
 import QuestionCard from "../../components/QuestionCard";
 import AnswerCard from "../../components/AnswerCard";
+import DeleteCardModal from "../../components/DeleteCardModal/DeleteCardModal";
 
 function HomePage() {
     const [card, setCard] = useState<Card | null>(null);
     const [mode, setMode] = useState<"question" | "answer">("question");
     const [loadingText, setLoadingText] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const [showDeleteCard, setShowDeleteCard] = useState<boolean>(false);
 
     useEffect(() => {
         if (null !== card) {
@@ -106,7 +108,8 @@ function HomePage() {
                     <button
                         className="discard-button"
                         title="Delete card"
-                        onClick={() => deleteCard(card)}
+                        onClick={() => setShowDeleteCard(true)}
+                        aria-label="Delete card"
                     >
                         🗑️
                     </button>
@@ -120,10 +123,26 @@ function HomePage() {
                         />
                     ) : (
                         <AnswerCard
+                            question={card.question}
                             answer={card.answer}
                             onNextClick={showNextCard}
                         />
                     )}
+                    <DeleteCardModal
+                        open={showDeleteCard}
+                        question={card.question}
+                        answer={card.answer}
+                        category={card.category}
+                        onCancel={() => {
+                            setShowDeleteCard(false);
+                        }}
+                        onDelete={() => {
+                            if (card) {
+                                deleteCard(card);
+                            }
+                            setShowDeleteCard(false);
+                        }}
+                    />
                 </>
             )}
         </main>

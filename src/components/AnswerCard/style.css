@@ -1,6 +1,7 @@
 .answer {
     text-align: left;
     font-size: 1.15rem;
+    max-width: 1000px;
 }
 
 .next-button {
