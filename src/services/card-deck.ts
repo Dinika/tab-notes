@@ -71,6 +71,36 @@ export function addCardToDeck(
     saveDeckToCategory(category, deck);
 }
 
+export function updateCardInDeck(
+    originalCategory: TCategory,
+    cardToUpdate: Card,
+) {
+    if (originalCategory === cardToUpdate.category) {
+        const deck =
+            getCategoryDeck(originalCategory)?.map((c) => {
+                if (c.id === cardToUpdate.id) {
+                    return { ...c, ...cardToUpdate };
+                }
+                return c;
+            }) ?? [];
+        saveDeckToCategory(originalCategory, deck);
+        return;
+    }
+
+    // If the category has changed, we need to remove the card from the original category and add it to the new one
+    const originalDeck =
+        getCategoryDeck(originalCategory)?.filter(
+            (c) => c.id !== cardToUpdate.id,
+        ) ?? [];
+    saveDeckToCategory(originalCategory, originalDeck);
+
+    const newCategory = cardToUpdate.category;
+    const newCategoryDeck = getCategoryDeck(newCategory) ?? [];
+    // Deck is a queue. Since this card is newly added to the deck it should be added at the end of the deck so that it is last one to be picked.
+    newCategoryDeck.push({ ...cardToUpdate, lastUpdatedAt: Date.now() });
+    saveDeckToCategory(newCategory, newCategoryDeck);
+}
+
 export function removeCardFromDeck(id: string, category: TCategory) {
     let deck = getCategoryDeck(category);
     if (null === deck) {

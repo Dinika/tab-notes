@@ -4,11 +4,13 @@ import { getAllCards, removeCardFromDeck } from "../../services/card-deck";
 import "./Deck.css";
 import { formatDate, normalizeString } from "../../services/common";
 import DeleteCardModal from "../../components/DeleteCardModal/DeleteCardModal";
+import EditCardModal from "../../components/EditCardModal/EditCardModal";
 
 const Deck: React.FC = () => {
     const [cards, setCards] = useState<Card[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [cardToDelete, setCardToDelete] = useState<null | Card>(null);
+    const [cardToEdit, setCardToEdit] = useState<null | Card>(null);
 
     useEffect(() => {
         refreshDeck();
@@ -17,10 +19,6 @@ const Deck: React.FC = () => {
     const refreshDeck = () => {
         const storedCards = getAllCards();
         setCards(storedCards);
-    };
-
-    const handleEdit = (id: string) => {
-        console.log(`Edit card with id: ${id}`);
     };
 
     const matchesSearchTerm = (card: Card, searchTerm: string) => {
@@ -81,7 +79,7 @@ const Deck: React.FC = () => {
                             <td>{card.category}</td>
                             <td>{formatDate(card.lastUpdatedAt)}</td>
                             <td>
-                                <button onClick={() => handleEdit(card.id)}>
+                                <button onClick={() => setCardToEdit(card)}>
                                     Edit
                                 </button>
                                 <button onClick={() => setCardToDelete(card)}>
@@ -109,6 +107,18 @@ const Deck: React.FC = () => {
                         setCardToDelete(null);
                         refreshDeck();
                     }
+                }}
+            />
+
+            <EditCardModal
+                open={cardToEdit !== null}
+                card={cardToEdit!}
+                onSave={() => {
+                    refreshDeck();
+                    setCardToEdit(null);
+                }}
+                onCancel={() => {
+                    setCardToEdit(null);
                 }}
             />
         </main>

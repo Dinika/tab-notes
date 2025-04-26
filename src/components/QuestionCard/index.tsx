@@ -1,4 +1,4 @@
-import { categories, Category, TCategory } from "../../types";
+import { categories, TCategory } from "../../types";
 import "./style.css";
 
 interface QuestionCardProps {

@@ -1,7 +1,5 @@
 import { useEffect, useRef } from "react";
 import "./DeleteCardModal.css";
-import { Card, TCategory } from "../../types";
-import { removeCardFromDeck } from "../../services/card-deck";
 
 interface DeleteCardModalProps {
     open: boolean;
@@ -52,7 +50,7 @@ function DeleteCardModal({
             id="delete-card-dialog"
             className="modal-backdrop"
         >
-            <h3>Are you sure you want to delete this card?</h3>
+            <h3>Are you sure you want to delete this flashcard?</h3>
             <div className="card-details">
                 <div className="row">
                     <span>Question:</span>
