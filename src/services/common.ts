@@ -17,6 +17,16 @@ export const generateUniqueId = (): string => {
     return `${timestamp}${randomTwoDigit}`;
 };
 
+export const formatDate = (timestamp: number): string => {
+    const date = new Date(timestamp);
+    const options: Intl.DateTimeFormatOptions = {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+    };
+    return date.toLocaleDateString(undefined, options);
+};
+
 const formatAnswerForWordOfTheDay = (word: WordnikWord): string => {
     // Get first two definitions
     const definitions = word.definitions.slice(0, 2).map((def, index) => {

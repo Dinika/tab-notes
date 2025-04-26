@@ -14,6 +14,17 @@ const WeightedCardCategories = [
     Category.Easy,
 ];
 
+export function getAllCards(): Card[] {
+    const allCards: Card[] = [];
+    categories.forEach((category) => {
+        const deck = getCategoryDeck(category);
+        if (null !== deck) {
+            allCards.push(...deck);
+        }
+    });
+    return allCards;
+}
+
 export function getRandomCardFromDeck(): Card | null {
     const category =
         WeightedCardCategories[

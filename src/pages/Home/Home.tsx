@@ -98,7 +98,7 @@ function HomePage() {
     };
 
     return (
-        <div className="card">
+        <main className="card">
             {loadingText && <p>{loadingText}</p>}
             {error && <p>{error}</p>}
             {card && (
@@ -126,7 +126,7 @@ function HomePage() {
                     )}
                 </>
             )}
-        </div>
+        </main>
     );
 }
 

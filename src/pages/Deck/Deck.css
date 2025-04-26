@@ -1,0 +1,42 @@
+.deck-container {
+    margin: 0 50px;
+}
+
+.deck-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.deck-table th {
+    background-color: var(--highlight-color-2);
+    color: #333;
+    font-weight: bold;
+}
+
+.deck-table th,
+.deck-table td {
+    border: 1px solid #333;
+    padding: 8px;
+    text-align: left;
+}
+
+.deck-table tr:nth-child(even) {
+    background-color: #313131dd;
+}
+
+.answer-column {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.id-column {
+    max-width: 100px;
+}
+
+button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}

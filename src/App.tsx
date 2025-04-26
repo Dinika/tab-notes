@@ -43,12 +43,10 @@ function App() {
                 open={showModal}
                 onCloseModal={() => setShowModal(false)}
             />
-            <main>
-                <Routes>
-                    <Route index element={<HomePage />} />
-                    <Route path="deck" element={<Deck />} />
-                </Routes>
-            </main>
+            <Routes>
+                <Route index element={<HomePage />} />
+                <Route path="deck" element={<Deck />} />
+            </Routes>
             <footer>
                 <a
                     className="source-code"

@@ -6,6 +6,10 @@
     font-size: 16px;
 }
 
+main {
+    margin: 0 auto;
+}
+
 .card {
     position: relative;
     padding: 2em;
