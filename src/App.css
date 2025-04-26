@@ -17,9 +17,30 @@ nav {
     font-weight: 600;
 }
 
-main {
-    margin: 0 auto;
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
 }
+
+nav button {
+    font-weight: 700;
+    padding: 0;
+}
+
+nav button:hover {
+    color: var(--highlight-color);
+    background-color: transparent;
+}
+
+nav a:hover {
+    color: var(--highlight-color);
+}
+
+nav a.active {
+    color: var(--highlight-color-2);
+}
+
 ul {
     display: flex;
     list-style-type: none;
@@ -27,6 +48,10 @@ ul {
 
 li {
     margin: 0 1rem;
+}
+
+main {
+    margin: 0 auto;
 }
 
 .source-code {

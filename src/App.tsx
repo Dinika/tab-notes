@@ -1,8 +1,9 @@
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, NavLink, Route, Routes } from "react-router";
 import HomePage from "./pages/Home/Home";
 import "./App.css";
 import { useState } from "react";
 import AddCardModal from "./components/AddCardModal/AddCardModal";
+import Deck from "./pages/Deck/Deck";
 
 function App() {
     const [showModal, setShowModal] = useState(false);
@@ -16,8 +17,26 @@ function App() {
                             Add card
                         </button>
                     </li>
-                    <li>Home</li>
-                    <li>Deck</li>
+                    <li>
+                        <NavLink
+                            to="/"
+                            className={({ isActive }) =>
+                                isActive ? "active" : ""
+                            }
+                        >
+                            Home
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to="/deck"
+                            className={({ isActive }) =>
+                                isActive ? "active" : ""
+                            }
+                        >
+                            Deck
+                        </NavLink>
+                    </li>
                 </ul>
             </nav>
             <AddCardModal
@@ -25,11 +44,10 @@ function App() {
                 onCloseModal={() => setShowModal(false)}
             />
             <main>
-                <BrowserRouter>
-                    <Routes>
-                        <Route index element={<HomePage />} />
-                    </Routes>
-                </BrowserRouter>
+                <Routes>
+                    <Route index element={<HomePage />} />
+                    <Route path="deck" element={<Deck />} />
+                </Routes>
             </main>
             <footer>
                 <a
