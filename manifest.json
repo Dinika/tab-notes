@@ -1,0 +1,13 @@
+{
+    "manifest_version": 2,
+    "name": "Tab Notes",
+    "version": "1.0",
+    "description": "A flashcard extension to help you learn and memorize information while browsing.",
+    "icons": {
+        "48": "icon.png"
+    },
+    "chrome_url_overrides": {
+        "newtab": "index.html"
+    },
+    "permissions": []
+}
