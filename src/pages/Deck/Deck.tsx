@@ -29,20 +29,31 @@ const Deck: React.FC = () => {
         );
     };
 
+    const displayedCards = cards.filter((card) =>
+        matchesSearchTerm(card, searchTerm),
+    );
+
     return (
         <main className="deck-container">
             <div className="deck-header">
-                <label htmlFor="deck-search">Search:</label>
-                <input
-                    type="text"
-                    id="deck-search"
-                    placeholder="Search cards..."
-                    onChange={(e) => {
-                        setSearchTerm(e.target.value);
-                    }}
-                />
-                <button onClick={() => setSearchTerm("")}>Reset</button>
-                <span className="deck-count">{cards.length} cards</span>
+                <div className="search">
+                    <label htmlFor="deck-search">Search:</label>
+                    <input
+                        type="text"
+                        id="deck-search"
+                        placeholder="Search cards..."
+                        value={searchTerm}
+                        onChange={(e) => {
+                            setSearchTerm(e.target.value);
+                        }}
+                    />
+                    <button onClick={() => setSearchTerm("")}>Reset</button>
+                </div>
+                <div>
+                    <span className="deck-count">
+                        {displayedCards.length} cards / {cards.length} total
+                    </span>
+                </div>
             </div>
             <table className="deck-table">
                 <thead>
@@ -56,32 +67,28 @@ const Deck: React.FC = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {cards
-                        .filter((card) => matchesSearchTerm(card, searchTerm))
-                        .map((card, index) => (
-                            <tr key={card.id + index}>
-                                <td className="id-column">{card.id}</td>
-                                <td>{card.question}</td>
-                                <td
-                                    className="answer-column"
-                                    dangerouslySetInnerHTML={{
-                                        __html: card.answer,
-                                    }}
-                                ></td>
-                                <td>{card.category}</td>
-                                <td>{formatDate(card.lastUpdatedAt)}</td>
-                                <td>
-                                    <button onClick={() => handleEdit(card.id)}>
-                                        Edit
-                                    </button>
-                                    <button
-                                        onClick={() => handleDelete(card.id)}
-                                    >
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
+                    {displayedCards.map((card, index) => (
+                        <tr key={card.id + index}>
+                            <td className="id-column">{card.id}</td>
+                            <td>{card.question}</td>
+                            <td
+                                className="answer-column"
+                                dangerouslySetInnerHTML={{
+                                    __html: card.answer,
+                                }}
+                            ></td>
+                            <td>{card.category}</td>
+                            <td>{formatDate(card.lastUpdatedAt)}</td>
+                            <td>
+                                <button onClick={() => handleEdit(card.id)}>
+                                    Edit
+                                </button>
+                                <button onClick={() => handleDelete(card.id)}>
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </main>

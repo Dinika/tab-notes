@@ -2,6 +2,34 @@
     margin: 0 50px;
 }
 
+.deck-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.5rem;
+}
+
+.deck-header .search {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.deck-header label {
+    margin-right: 1rem;
+}
+
+.deck-header input {
+    padding: 0.5rem;
+    border: 1px solid #666;
+    background-color: #2a2a2a;
+    max-width: 500px;
+    color: white;
+    border-radius: 50px;
+    margin-right: 1rem;
+}
+
 .deck-table {
     width: 100%;
     border-collapse: collapse;
