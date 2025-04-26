@@ -44,9 +44,6 @@ function AddCardModal({ open, onCloseModal }: AddCardModalProps) {
         const question = formData.get("question")?.toString().trim();
         const answer = formData.get("answer")?.toString().trim();
         const category = formData.get("category")?.toString() as TCategory;
-        console.log("Cat", category);
-        console.log("Question", question);
-        console.log("ANswer", answer);
 
         if (!question || !answer || !category) {
             setErrorMessage("All fields are required.");

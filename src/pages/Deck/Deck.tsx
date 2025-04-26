@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "../../types";
-import { getAllCards } from "../../services/card-deck";
+import { getAllCards, removeCardFromDeck } from "../../services/card-deck";
 import "./Deck.css";
 import { formatDate, normalizeString } from "../../services/common";
+import DeleteCardModal from "../../components/DeleteCardModal/DeleteCardModal";
 
 const Deck: React.FC = () => {
     const [cards, setCards] = useState<Card[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>("");
+    const [cardToDelete, setCardToDelete] = useState<null | Card>(null);
 
     useEffect(() => {
-        const storedCards = getAllCards();
-        console.log("Stored cards:", storedCards);
-        setCards([...storedCards, ...storedCards]);
+        refreshDeck();
     }, []);
+
+    const refreshDeck = () => {
+        const storedCards = getAllCards();
+        setCards(storedCards);
+    };
 
     const handleEdit = (id: string) => {
         console.log(`Edit card with id: ${id}`);
-    };
-
-    const handleDelete = (id: string) => {
-        console.log(`Delete card with id: ${id}`);
     };
 
     const matchesSearchTerm = (card: Card, searchTerm: string) => {
@@ -83,7 +84,7 @@ const Deck: React.FC = () => {
                                 <button onClick={() => handleEdit(card.id)}>
                                     Edit
                                 </button>
-                                <button onClick={() => handleDelete(card.id)}>
+                                <button onClick={() => setCardToDelete(card)}>
                                     Delete
                                 </button>
                             </td>
@@ -91,6 +92,25 @@ const Deck: React.FC = () => {
                     ))}
                 </tbody>
             </table>
+            <DeleteCardModal
+                open={cardToDelete !== null}
+                question={cardToDelete?.question || ""}
+                answer={cardToDelete?.answer || ""}
+                category={cardToDelete?.category || ""}
+                onCancel={() => {
+                    setCardToDelete(null);
+                }}
+                onDelete={() => {
+                    if (cardToDelete) {
+                        removeCardFromDeck(
+                            cardToDelete.id,
+                            cardToDelete.category,
+                        );
+                        setCardToDelete(null);
+                        refreshDeck();
+                    }
+                }}
+            />
         </main>
     );
 };

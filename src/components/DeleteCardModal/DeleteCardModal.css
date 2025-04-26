@@ -1,0 +1,53 @@
+h3 {
+    color: var(--highlight-color-2);
+}
+
+dialog {
+    max-width: 700px;
+    padding: 0 2rem 1.5rem;
+}
+
+.card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+}
+
+.row span {
+    color: #b6b6b6;
+}
+
+.row div {
+    margin-left: 2rem;
+    text-align: left;
+}
+
+.answer {
+    border: 1px solid #3e3e3e;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.modal-actions button {
+    border-radius: 50px;
+    border: 2px solid black;
+    font-weight: 600;
+}
+
+.modal-actions .delete-button {
+    background-color: var(--error-color);
+}
+
+.modal-actions button:hover {
+    background-color: var(--highlight-color);
+    color: white;
+}
