@@ -100,7 +100,7 @@ button {
 }
 
 .form-actions button:hover {
-    background-color: #646cff;
+    background-color: var(--highlight-color);
     color: white;
 }
 .form-actions button:focus,
@@ -111,11 +111,11 @@ button {
 input[type="radio"] {
     width: 16px;
     height: 16px;
-    accent-color: #646cff;
+    accent-color: var(--highlight-color);
     cursor: pointer;
 }
 
 .error {
-    color: #fc724c;
+    color: var(--error-color);
     margin-left: 116px;
 }

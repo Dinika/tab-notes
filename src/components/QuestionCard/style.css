@@ -18,15 +18,15 @@
 }
 
 .easy {
-    background-color: #3fc37d;
+    background-color: var(--success-color);
 }
 
 .medium {
-    background-color: #87c5e1;
+    background-color: var(--hightlight-color-2);
 }
 
 .difficult {
-    background-color: #fc724c;
+    background-color: var(--error-color);
 }
 
 .current-category-mark {
