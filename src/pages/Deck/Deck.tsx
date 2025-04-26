@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Card } from "../../types";
 import { getAllCards } from "../../services/card-deck";
 import "./Deck.css";
-import { formatDate } from "../../services/common";
+import { formatDate, normalizeString } from "../../services/common";
 
 const Deck: React.FC = () => {
     const [cards, setCards] = useState<Card[]>([]);
+    const [searchTerm, setSearchTerm] = useState<string>("");
 
     useEffect(() => {
         const storedCards = getAllCards();
@@ -21,9 +22,28 @@ const Deck: React.FC = () => {
         console.log(`Delete card with id: ${id}`);
     };
 
+    const matchesSearchTerm = (card: Card, searchTerm: string) => {
+        const normalizedSearchTerm = normalizeString(searchTerm);
+        return normalizeString(JSON.stringify(card)).includes(
+            normalizedSearchTerm,
+        );
+    };
+
     return (
         <main className="deck-container">
-            <h1>Deck</h1>
+            <div className="deck-header">
+                <label htmlFor="deck-search">Search:</label>
+                <input
+                    type="text"
+                    id="deck-search"
+                    placeholder="Search cards..."
+                    onChange={(e) => {
+                        setSearchTerm(e.target.value);
+                    }}
+                />
+                <button onClick={() => setSearchTerm("")}>Reset</button>
+                <span className="deck-count">{cards.length} cards</span>
+            </div>
             <table className="deck-table">
                 <thead>
                     <tr>
@@ -36,28 +56,32 @@ const Deck: React.FC = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {cards.map((card, index) => (
-                        <tr key={card.id + index}>
-                            <td className="id-column">{card.id}</td>
-                            <td>{card.question}</td>
-                            <td
-                                className="answer-column"
-                                dangerouslySetInnerHTML={{
-                                    __html: card.answer,
-                                }}
-                            ></td>
-                            <td>{card.category}</td>
-                            <td>{formatDate(card.lastUpdatedAt)}</td>
-                            <td>
-                                <button onClick={() => handleEdit(card.id)}>
-                                    Edit
-                                </button>
-                                <button onClick={() => handleDelete(card.id)}>
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
+                    {cards
+                        .filter((card) => matchesSearchTerm(card, searchTerm))
+                        .map((card, index) => (
+                            <tr key={card.id + index}>
+                                <td className="id-column">{card.id}</td>
+                                <td>{card.question}</td>
+                                <td
+                                    className="answer-column"
+                                    dangerouslySetInnerHTML={{
+                                        __html: card.answer,
+                                    }}
+                                ></td>
+                                <td>{card.category}</td>
+                                <td>{formatDate(card.lastUpdatedAt)}</td>
+                                <td>
+                                    <button onClick={() => handleEdit(card.id)}>
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => handleDelete(card.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
                 </tbody>
             </table>
         </main>

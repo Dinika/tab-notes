@@ -27,6 +27,10 @@ export const formatDate = (timestamp: number): string => {
     return date.toLocaleDateString(undefined, options);
 };
 
+export const normalizeString = (str: string): string => {
+    return str.toLowerCase().trim();
+};
+
 const formatAnswerForWordOfTheDay = (word: WordnikWord): string => {
     // Get first two definitions
     const definitions = word.definitions.slice(0, 2).map((def, index) => {
