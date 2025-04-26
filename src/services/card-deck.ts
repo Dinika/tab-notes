@@ -1,4 +1,4 @@
-import { Card, Category, TCategory } from "../types";
+import { Card, categories, Category, TCategory } from "../types";
 import { getCategoryDeck, saveDeckToCategory } from "./local-storage";
 
 const WeightedCardCategories = [
@@ -15,7 +15,6 @@ const WeightedCardCategories = [
 ];
 
 export function getRandomCardFromDeck(): Card | null {
-    const categories = [Category.Difficult, Category.Medium, Category.Easy];
     const category =
         WeightedCardCategories[
             Math.floor(Math.random() * WeightedCardCategories.length)

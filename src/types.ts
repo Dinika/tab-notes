@@ -15,6 +15,12 @@ export const Category = {
 
 export type TCategory = (typeof Category)[keyof typeof Category];
 
+export const categories: TCategory[] = [
+    Category.Easy,
+    Category.Medium,
+    Category.Difficult,
+];
+
 export interface WordnikWord {
     _id: string;
     word: string;

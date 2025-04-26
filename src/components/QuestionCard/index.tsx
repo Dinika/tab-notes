@@ -1,4 +1,4 @@
-import { Category, TCategory } from "../../types";
+import { categories, Category, TCategory } from "../../types";
 import "./style.css";
 
 interface QuestionCardProps {
@@ -6,8 +6,6 @@ interface QuestionCardProps {
     currentCategory: string;
     onCategorySelected: (category: TCategory) => void;
 }
-
-const categories = [Category.Easy, Category.Medium, Category.Difficult];
 
 function QuestionCard({
     question,

@@ -1,0 +1,121 @@
+dialog {
+    z-index: 1000;
+    border: none;
+    border-radius: 1rem;
+    min-width: 700px;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(2px);
+    opacity: 0.75;
+}
+
+.close-button {
+    font-size: 2rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+    height: 48px;
+    width: 48px;
+}
+
+dialog form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.form-row label {
+    flex: 0 0 100px;
+    text-align: right;
+}
+
+input,
+textarea {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #666;
+    background-color: #2a2a2a;
+    color: white;
+    border-radius: 4px;
+}
+
+textarea {
+    height: 80px;
+}
+
+.category-options {
+    display: flex;
+    width: 100%;
+}
+
+.category-options label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+}
+
+.category-options input {
+    flex: none;
+    margin-right: 1rem;
+}
+
+button {
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 1.5rem;
+}
+
+.form-actions button {
+    border-radius: 50px;
+    border: 0.25rem solid black;
+    font-weight: 600;
+}
+
+.form-actions button[type="submit"] {
+    background-color: black;
+}
+
+.form-actions button:hover {
+    background-color: #646cff;
+    color: white;
+}
+.form-actions button:focus,
+.form-actions button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}
+
+input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #646cff;
+    cursor: pointer;
+}
+
+.error {
+    color: #fc724c;
+    margin-left: 116px;
+}
