@@ -7,7 +7,7 @@
         "48": "icon.png"
     },
     "chrome_url_overrides": {
-        "newtab": "index.html"
+        "newtab": "./index.html"
     },
     "permissions": []
 }

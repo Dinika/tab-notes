@@ -14,7 +14,7 @@ function App() {
                 <ul>
                     <li>
                         <button onClick={() => setShowModal(true)}>
-                            Add card
+                            Add cardsssss
                         </button>
                     </li>
                     <li>
@@ -44,7 +44,7 @@ function App() {
                 onCloseModal={() => setShowModal(false)}
             />
             <Routes>
-                <Route index element={<HomePage />} />
+                <Route path="" element={<HomePage />} />
                 <Route path="deck" element={<Deck />} />
             </Routes>
             <footer>
