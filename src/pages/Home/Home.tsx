@@ -55,7 +55,9 @@ function HomePage() {
             try {
                 const initialCard = await getRandomCardFromDeck();
                 if (null === initialCard) {
-                    setError("There are no cards in the deck");
+                    setError(
+                        "There are no cards in the deck. Click on the 'Add card' button to add a new card.",
+                    );
                     return;
                 }
                 setCard({
@@ -84,7 +86,9 @@ function HomePage() {
     const showNextCard = async () => {
         const newCard = await getRandomCardFromDeck();
         if (null === newCard) {
-            setError("There are no cards in the deck");
+            setError(
+                "There are no cards in the deck. Click on the 'Add card' button to add a new card.",
+            );
             return;
         }
         setCard({

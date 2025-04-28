@@ -14,7 +14,7 @@ function App() {
                 <ul>
                     <li>
                         <button onClick={() => setShowModal(true)}>
-                            Add cardsssss
+                            Add card
                         </button>
                     </li>
                     <li>

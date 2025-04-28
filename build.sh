@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -o errexit
+set -o nounset
+set -o pipefail
+
 rm -rf firefox-extension
 rm -rf dist
 npm run build
