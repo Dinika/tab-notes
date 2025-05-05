@@ -1,0 +1,45 @@
+name: Add-on Release
+
+on:
+    workflow_dispatch:
+
+jobs:
+    build-and-release:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "22"
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Extract version from manifest.json
+              id: get_version
+              run: echo "extension_version=$(jq -r .version manifest.json)" >> $GITHUB_OUTPUT
+
+            - name: Run build script
+              run: ./build.sh
+              env:
+                  VITE_WORDNIK_API_KEY: ${{ secrets.VITE_WORDNIK_API_KEY }}
+
+            - name: Create GitHub Release
+              uses: softprops/action-gh-release@v1
+              with:
+                  tag_name: v${{ steps.get_version.outputs.extension_version }}
+                  name: Firefox Release v${{ steps.get_version.outputs.extension_version }}
+                  draft: false
+                  prerelease: false
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Upload extension zip
+              uses: softprops/action-gh-release@v1
+              with:
+                  files: firefox-extensions/firefox-extension.zip
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
