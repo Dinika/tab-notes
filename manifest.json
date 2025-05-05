@@ -1,7 +1,11 @@
 {
     "manifest_version": 2,
     "name": "Flashcards",
-    "version": "1.0",
+    "version": "1.0.2",
+    "engines": {
+        "npm": "^10.9.0",
+        "node": "^22.11.0"
+    },
     "description": "A flashcard extension to help you learn and memorize new words and much more as you browse.",
     "icons": {
         "48": "icon.png"
