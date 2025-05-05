@@ -25,7 +25,7 @@ jobs:
             - name: Run build script
               run: ./build.sh
               env:
-                  VITE_WORDNIK_API_KEY: ${{ secrets.VITE_WORDNIK_API_KEY }}
+                VITE_WORDNIK_API_KEY: ${{ secrets.VITE_WORDNIK_API_KEY }}
 
             - name: Create GitHub Release
               uses: softprops/action-gh-release@v1
@@ -35,11 +35,11 @@ jobs:
                   draft: false
                   prerelease: false
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Upload extension zip
               uses: softprops/action-gh-release@v1
               with:
-                  files: firefox-extensions/firefox-extension.zip
+                files: firefox-extensions/firefox-extension.zip
               env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

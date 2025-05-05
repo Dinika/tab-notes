@@ -103,6 +103,16 @@ VITE_WORDNIK_API_KEY=jxa90zqb9wwwn8tzfg46czv5peae3zberr6calsaf6kpwchbg
 
 Now you should be able to test the word-of-the-day feature when you [build the extension](#building-extension-for-publishing) or [develop the extension](#developing).
 
+## Creating a release
+
+This action can only be performed by admins.
+Currently the extension is only available on Firefox. To create a fresh release that can be uploaded to firefox follow these steps:
+
+1. Update the version in manifest.json (and optionally also in package.json for consistency). [Semver guidelines](https://semver.org/) should be followed.
+2. Push the updated version to main branch.
+3. Trigger the []"Add-on Release" workflow](https://github.com/Dinika/flashcards/actions/workflows/release.yml) on github. This should generate a new release as a zip file when it succeeds.
+4. Upload this zip file to firefox addon.
+
 ### Supporting Wordnik
 
 I love Wordnik. They are easy to use, comprehensive, and free. The main reason I wanted to develop this extension is to automate learning a new word everyday and I was surprised by how pricey and in-accessible most word-of-the-day APIs were.
