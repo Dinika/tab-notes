@@ -29,13 +29,13 @@ This extension is tested and developed in the following environment:
 ./build.sh
 ```
 
-This script will build the react app, bundle it together with necessary icons, manifest.json etc and **create a zip file called firefox-extension.zip** with all the contents necessary to deploy/publish the extension.
+This script will build the react app, bundle it together with necessary icons, manifest.json etc and **create a zip file called flashcards-extension.zip** with all the contents necessary to deploy/publish the extension.
 
 3. Test the extension in Firefox:
 
 - Open `about:debugging#/runtime/this-firefox` in firefox browser (by typing it in the address bar)
 - Click "Load Temporary Add-on..." button
-- Select the "firefox-extension.zip" file that was created in step 1 above
+- Select the "flashcards-extension.zip" file that was created in step 1 above
 - If the above steps passed without any issues, you should be able to test this extension by simply opening a new tab! You will see the Home page of the extension and a new word of the day will be fetched.
 
 ## Developing

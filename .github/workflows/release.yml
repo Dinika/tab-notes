@@ -35,6 +35,6 @@ jobs:
                   name: Firefox Release v${{ steps.get_version.outputs.extension_version }}
                   draft: false
                   prerelease: false
-                  files: firefox-extensions/firefox-extension.zip
+                  files: flashcards-extension/flashcards-extension.zip
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

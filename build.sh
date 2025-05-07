@@ -4,17 +4,17 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-rm -rf firefox-extension
+rm -rf flashcards-extension
 rm -rf dist
 npm run build
 
-mkdir -p firefox-extensions
-cp -a manifest.json icon.png dist/assets dist/index.html firefox-extensions/
+mkdir -p flashcards-extension
+cp -a manifest.json icon.png dist/assets dist/index.html flashcards-extension/
 
-sed -i 's|"/|"./|g' firefox-extensions/index.html
+sed -i 's|"/|"./|g' flashcards-extension/index.html
 
-cd firefox-extensions
-zip -r firefox-extension.zip ./manifest.json assets/ index.html  icon.png
+cd flashcards-extension
+zip -r flashcards-extension.zip ./manifest.json assets/ index.html  icon.png
 cd ..
 
 echo "Done!"
