@@ -79,8 +79,9 @@ Currently the extension is only available on Firefox. To create a fresh release 
 
 1. Update the version in manifest.json (and optionally also in package.json for consistency). [Semver guidelines](https://semver.org/) should be followed.
 2. Push the updated version to main branch.
-3. Trigger the []"Add-on Release" workflow](https://github.com/Dinika/flashcards/actions/workflows/release.yml) on github. This should generate a new release as a zip file when it succeeds.
-4. Upload this zip file to firefox addon.
+3. Trigger the ["Add-on Release" workflow](https://github.com/Dinika/flashcards/actions/workflows/release.yml) on github. This should generate a new release as a zip file when it succeeds.
+4. Test the released zip file (available in Github) by uploading it locally in firefox at `about:debugging#/runtime/this-firefox`.
+5. Upload this zip file to firefox addon.
 
 ### Supporting Wordnik
 
