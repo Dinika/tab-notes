@@ -20,7 +20,7 @@ This extension is tested and developed in the following environment:
 - npm - version 10.9.0
 - RAM - 40 GB
 
-## Building extension (for publishing)
+## Building & testing extension
 
 0. If you don't yet have project dependencies installed, please run `npm i` in the root of the project to install everything.
 1. Run the `./build.sh` script (in the root of this project) to build the extension.
@@ -71,14 +71,6 @@ Development dependencies
 - TypeScript
 - Prettier
 - ESLint
-
-## Getting API key from Wordnik
-
-### Why is the API key needed?
-
-While users can add just about any kind of flashcard to this extension, there are some special flashcards that are added automatically everyday this extension is used. These cards show users a new word of the day to help train vocabulary. The wonderful [Wordnik API](https://developer.wordnik.com/) is used to help build this feature.
-
-If you are developing or testing this extension yourself, you'll need to add an API key to query their [word-of-the-day](https://developer.wordnik.com/docs#!/words/getWordOfTheDay) method.
 
 ## Creating a release
 
