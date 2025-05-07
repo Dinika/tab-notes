@@ -23,9 +23,7 @@ This extension is tested and developed in the following environment:
 ## Building extension (for publishing)
 
 0. If you don't yet have project dependencies installed, please run `npm i` in the root of the project to install everything.
-
-1. (Optional) If you want to test the word-of-the-day feature please follow the steps in the [Setting up Wordnik API key section](#how-to-set-api-key-for-wordnik).
-2. Run the `./build.sh` script (in the root of this project) to build the extension.
+1. Run the `./build.sh` script (in the root of this project) to build the extension.
 
 ```bash
 ./build.sh
@@ -42,21 +40,13 @@ This script will build the react app, bundle it together with necessary icons, m
 
 ## Developing
 
-1. (Optional) - If you would like to test the word of the day feature, you'll need an API key. Please follow the steps in the ["Getting API key from Wordnik"](#getting-api-key-from-wordnik) section to do this.
-
-2. Save API key in `.env` file in the root of this project. This is a sample .env file. Replace "dummy-key" with your API key:
-
-```.env
-VITE_WORDNIK_API_KEY=dummy-key
-```
-
-3. Install dependencies:
+1. Install dependencies:
 
 ```bash
 npm i
 ```
 
-4. Start development project:
+2. Start development project:
 
 ```bash
 npm run dev
@@ -89,19 +79,6 @@ Development dependencies
 While users can add just about any kind of flashcard to this extension, there are some special flashcards that are added automatically everyday this extension is used. These cards show users a new word of the day to help train vocabulary. The wonderful [Wordnik API](https://developer.wordnik.com/) is used to help build this feature.
 
 If you are developing or testing this extension yourself, you'll need to add an API key to query their [word-of-the-day](https://developer.wordnik.com/docs#!/words/getWordOfTheDay) method.
-
-### How to set API key for Wordnik?
-
-If you face issues with any of the steps below, please feel free to get in touch with me via e-mail (dinika@greyllama.cc).
-
-1. Follow [Wordnik's Guidelines for getting an API key](https://developer.wordnik.com/gettingstarted). You will need to create a Wordnik account for this. The "free" plan is enough for testing purposes.
-2. Create a `.env` file in the root of this project (where this README is), and add an environment key by name `VITE_WORDNIK_API_KEY` and value as your API key. A sample .env file looks like this:
-
-```.env
-VITE_WORDNIK_API_KEY=jxa90zqb9wwwn8tzfg46czv5peae3zberr6calsaf6kpwchbg
-```
-
-Now you should be able to test the word-of-the-day feature when you [build the extension](#building-extension-for-publishing) or [develop the extension](#developing).
 
 ## Creating a release
 

@@ -21,14 +21,12 @@ export async function shouldFetchWordOfTheDay(): Promise<boolean> {
 }
 
 export async function fetchWordOfTheDay(): Promise<WordnikWord> {
-    const apiKey = import.meta.env.VITE_WORDNIK_API_KEY;
+    const wordOfTheDayApi =
+        "https://flashcards-proxy.vercel.app/word-of-the-day";
 
-    return fetch(
-        `https://api.wordnik.com/v4/words.json/wordOfTheDay?api_key=${apiKey}`,
-        {
-            headers: {
-                Accept: "application/json",
-            },
+    return fetch(wordOfTheDayApi, {
+        headers: {
+            Accept: "application/json",
         },
-    ).then((response) => response.json());
+    }).then((response) => response.json());
 }
